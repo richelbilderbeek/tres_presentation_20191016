@@ -1,0 +1,125 @@
+<style>
+.small-code pre code {
+  font-size: 1em;
+}
+</style>
+
+The Error We Make When Inferring A Phylogeny
+========================================================
+author: Richel J.C. Bilderbeek, Thijs Janzen, Giovanni Laudanno
+date:
+autosize: true
+
+![](CC-BY-NC-SA.png)
+[https://github.com/richelbilderbeek/tres_presentation_20191016](https://github.com/richelbilderbeek/tres_presentation_20191016)
+
+
+```{r echo=FALSE}
+library(pirouette)
+library(ggtree)
+library(ggplot2)
+
+if(!beastier::is_beast2_installed()) {
+  stop("BEAST2 not install. Tip: beastier::install_beast2()")
+}
+
+true_tree  <- ape::read.tree(text = "(((A:8, B:8):1, C:9):1, ((D:8, E:8):1, F:9):1);")
+
+alignment_params <- create_alignment_params(
+  root_sequence = create_blocked_dna(
+    length = 40
+  )
+)
+true_alignment <- create_alignment(
+  true_tree,
+  alignment_params
+)
+
+# Re-create the alignment as file
+create_alignment_file(
+  true_tree,
+  alignment_params
+)
+# Create a generative experiment of intermediate length
+experiment <- create_test_gen_experiment()
+experiment$inference_model$mcmc$chain_length <- 3e3
+
+true_posterior <- pirouette:::alignment_params_to_posterior_trees(
+  alignment_params = alignment_params,
+  experiment = experiment
+)
+
+# Remove burn-in by hand
+from <- 0.5 * length(true_posterior)
+to <- 1.0 * length(true_posterior)
+clean_posterior <- true_posterior[from:to]
+
+# Consensus tree is a comb tree
+concensus_tree <- ape::consensus(clean_posterior)
+```
+
+Overview
+========================================================
+
+ * 0-5 min: (ik/Giovanni) biological stuff
+ * 5-15 min: (ik) pirouette's workflow
+ * 15-20 min: (Giovanni) MBD: biology in a bit more detail, preliminary results
+ * 20-30 min: (Thijs) nodeSub: biology in a bit more detail, difference with 'normale' pirouette pipeline, preliminary results
+
+What we measure in the field
+========================================================
+
+```{r echo=FALSE}
+image(true_alignment)
+```
+
+What we infer
+========================================================
+
+A posterior
+
+```{r echo=FALSE}
+babette::plot_densitree(
+  clean_posterior,
+  width = 2,
+  alpha = 5.0 / length(clean_posterior),
+  consensus = true_tree$tip.label,
+  scale.bar = FALSE,
+  cex = 3
+)
+```
+
+***
+
+A consensus tree
+
+```{r echo=FALSE}
+ggtree::ggtree(concensus_tree, size = 2)
+```
+
+What is the error we make?
+========================================================
+
+The possible true tree
+
+```{r echo=FALSE}
+ape::plot.phylo(true_tree, size = 2, cex = 3)
+```
+
+***
+
+What we inferred
+
+```{r echo=FALSE}
+babette::plot_densitree(
+  clean_posterior,
+  width = 2,
+  alpha = 5.0 / length(clean_posterior),
+  consensus = true_tree$tip.label,
+  scale.bar = FALSE,
+  cex = 3
+)
+```
+
+What is the error we make?
+========================================================
