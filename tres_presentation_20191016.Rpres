@@ -8,6 +8,7 @@ The Error We Make When Inferring A Phylogeny
 ========================================================
 author: Richel J.C. Bilderbeek, Thijs Janzen, Giovanni Laudanno
 date:
+transition: rotate
 autosize: true
 
 ![](CC-BY-NC-SA.png)
@@ -23,54 +24,48 @@ if(!beastier::is_beast2_installed()) {
   stop("BEAST2 not install. Tip: beastier::install_beast2()")
 }
 
+# Part 1:
+# * no twinning
+# * one generative model
 true_tree  <- ape::read.tree(text = "(((A:8, B:8):1, C:9):1, ((D:8, E:8):1, F:9):1);")
-
-alignment_params <- create_alignment_params(
-  root_sequence = create_blocked_dna(
-    length = 40
+true_pir_params <- create_test_pir_params(
+  alignment_params = create_test_alignment_params(
+    root_sequence = create_blocked_dna(length = 40)
   )
 )
-true_alignment <- create_alignment(
-  true_tree,
-  alignment_params
-)
+true_results <- pir_run(true_tree, true_pir_params)
 
-# Re-create the alignment as file
-create_alignment_file(
-  true_tree,
-  alignment_params
+true_posterior_trees <- tracerer::parse_beast_trees(
+  true_pir_params$experiments[[1]]$beast2_options$output_trees_filenames
 )
-# Create a generative experiment of intermediate length
-experiment <- create_test_gen_experiment()
-experiment$inference_model$mcmc$chain_length <- 3e3
-
-true_posterior <- pirouette:::alignment_params_to_posterior_trees(
-  alignment_params = alignment_params,
-  experiment = experiment
-)
-
 # Remove burn-in by hand
-from <- 0.5 * length(true_posterior)
-to <- 1.0 * length(true_posterior)
-clean_posterior <- true_posterior[from:to]
-
-# Consensus tree is a comb tree
-concensus_tree <- ape::consensus(clean_posterior)
+from <- 0.5 * length(true_posterior_trees)
+to <- 1.0 * length(true_posterior_trees)
+clean_true_posterior_trees <- true_posterior_trees[from:to]
+concensus_tree <- ape::consensus(clean_true_posterior_trees)
 ```
 
 Overview
 ========================================================
 
- * 0-5 min: (ik/Giovanni) biological stuff
- * 5-15 min: (ik) pirouette's workflow
+Will be deleted before the actual presentation
+
+ * 0-5 min: me: biological stuff
+ * 5-15 min: me: pirouette's workflow, twinning
  * 15-20 min: (Giovanni) MBD: biology in a bit more detail, preliminary results
  * 20-30 min: (Thijs) nodeSub: biology in a bit more detail, difference with 'normale' pirouette pipeline, preliminary results
+
+Biology: which species lived when?
+========================================================
+
+![](crocodilians.png)
 
 What we measure in the field
 ========================================================
 
 ```{r echo=FALSE}
-image(true_alignment)
+# True alignment
+image(ape::read.FASTA(true_pir_params$alignment_params$fasta_filename))
 ```
 
 What we infer
@@ -80,9 +75,8 @@ A posterior
 
 ```{r echo=FALSE}
 babette::plot_densitree(
-  clean_posterior,
+  true_posterior_trees,
   width = 2,
-  alpha = 5.0 / length(clean_posterior),
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
   cex = 3
@@ -94,7 +88,7 @@ babette::plot_densitree(
 A consensus tree
 
 ```{r echo=FALSE}
-ggtree::ggtree(concensus_tree, size = 2)
+ggtree::ggtree(concensus_tree, size = 2) + geom_tiplab(size = 12)
 ```
 
 What is the error we make?
@@ -112,14 +106,190 @@ What we inferred
 
 ```{r echo=FALSE}
 babette::plot_densitree(
-  clean_posterior,
+  true_posterior_trees,
   width = 2,
-  alpha = 5.0 / length(clean_posterior),
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
   cex = 3
 )
 ```
 
-What is the error we make?
+Tool to quantify this error
 ========================================================
+
+```{r}
+library(pirouette)
+```
+
+ * `pirouette`
+ * R Package
+ * GPL-3 license
+ * [https://github.com/richelbilderbeek/pirouette](https://github.com/richelbilderbeek/pirouette)
+ * Used to do all experiments in this presentation
+
+Quantify the error
+========================================================
+
+```{r echo=FALSE, fig.width=4}
+# True tree
+ape::plot.phylo(true_tree, size = 2, cex = 3)
+```
+```{r echo=FALSE, fig.width=4}
+# True alignment
+image(ape::read.FASTA(true_pir_params$alignment_params$fasta_filename))
+```
+```{r echo=FALSE, fig.width=4}
+# True posterior
+babette::plot_densitree(
+  true_posterior_trees,
+  width = 2,
+  consensus = true_tree$tip.label,
+  scale.bar = FALSE,
+  cex = 3
+)
+```
+```{r echo=FALSE, fig.width=8}
+pir_plot(true_results)
+```
+
+Biological relevance
+========================================================
+
+ * We do inference with standard models
+ * These standard models may not suffice in all contexts
+ * With `pirouette` we can measure the error caused by mismatch
+   between using a standard model when (the simulated) nature follows
+   a different one
+
+```{r echo=FALSE}
+# Part 2:
+# * use a twin tree as a true tree
+# * no twinning
+# * one generative model
+twin_tree <- pirouette::create_twin_tree(true_tree)
+twin_pir_params <- create_test_pir_params(
+  alignment_params = create_test_alignment_params(
+    root_sequence = create_blocked_dna(length = 40)
+  )
+)
+twin_results <- pir_run(twin_tree, twin_pir_params)
+twin_posterior_trees <- tracerer::parse_beast_trees(
+  twin_pir_params$experiments[[1]]$beast2_options$output_trees_filenames
+)
+# Remove burn-in by hand
+from <- 0.5 * length(twin_posterior_trees)
+to <- 1.0 * length(twin_posterior_trees)
+clean_twin_posterior_trees <- twin_posterior_trees[from:to]
+```
+
+Using a PBD model
+========================================================
+
+```{r echo=FALSE, fig.width=4}
+# True tree
+ape::plot.phylo(true_tree, size = 2, cex = 3)
+```
+```{r echo=FALSE, fig.width=4}
+# True alignment
+image(ape::read.FASTA(true_pir_params$alignment_params$fasta_filename))
+```
+```{r echo=FALSE, fig.width=4}
+# True posterior
+babette::plot_densitree(
+  true_posterior_trees,
+  width = 2,
+  consensus = true_tree$tip.label,
+  scale.bar = FALSE,
+  cex = 3
+)
+```
+```{r echo=FALSE, fig.width=8}
+pir_plot(true_results)
+```
+
+Caveat
+========================================================
+
+Error is caused by
+ * Stochasticity in alignment simulation
+ * Stochasticity in posterior trees
+ * Mismatch between true speciation model and the one assumed
+
+We can remove this mismatch: *Twinning*
+
+Twinning
+========================================================
+
+```{r echo=FALSE}
+ape::plot.phylo(true_tree, size = 2, cex = 3)
+```
+
+***
+
+```{r echo=FALSE}
+ape::plot.phylo(twin_tree, size = 2, cex = 3)
+```
+
+Twin pipeline
+========================================================
+
+```{r echo=FALSE, fig.width=4}
+# True tree
+ape::plot.phylo(twin_tree, size = 2, cex = 3)
+```
+```{r echo=FALSE, fig.width=4}
+image(ape::read.FASTA(twin_pir_params$alignment_params$fasta_filename))
+```
+```{r echo=FALSE, fig.width=4}
+babette::plot_densitree(
+  twin_posterior_trees,
+  width = 2,
+  consensus = true_tree$tip.label,
+  scale.bar = FALSE,
+  cex = 3
+)
+```
+```{r echo=FALSE, fig.width=8}
+pir_plot(twin_results)
+```
+
+Comparing errors
+========================================================
+
+Full error:
+
+```{r echo=FALSE}
+pir_plot(true_results)
+```
+
+***
+
+Baseline error:
+
+```{r echo=FALSE}
+pir_plot(twin_results)
+```
+
+Biological interpretation of true and twin error distribution
+========================================================
+
+Two distributions are ...|then our inference is ...|due to ...
+-------------------------|-------------------------|----------------
+Very simular             |as good as we can        |the standard speciation priors being good enough
+Very differeny           |bad                      |using the wrong speciation prior
+In between               |disputable               |using the wrong speciation prior
+
+Case study: MBD
+========================================================
+
+ * max 5 minutes, by Giovanni: biology in a bit more detail, preliminary results
+
+Case study: nodeSub
+========================================================
+
+ * max 10 minutes, by Thijs: biology in a bit more detail, difference with 'normale' pirouette pipeline, preliminary results
+
+Questions
+========================================================
+
+?
