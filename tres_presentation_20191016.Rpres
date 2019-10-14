@@ -279,10 +279,66 @@ Very simular             |as good as we can        |the standard speciation prio
 Very differeny           |bad                      |using the wrong speciation prior
 In between               |disputable               |using the wrong speciation prior
 
-Case study: MBD
+Case study: Multiple birth model /1
 ========================================================
 
- * max 5 minutes, by Giovanni: biology in a bit more detail, preliminary results
+```{r echo=FALSE, out.width = "90%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_1.png")
+```
+
+***
+
+***
+
+Case study: Multiple birth model /1
+========================================================
+
+```{r echo=FALSE, out.width = "90%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_1.png")
+```
+
+***
+
+```{r echo=FALSE, out.width = "100%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_2.png")
+```
+ 
+Case study: Multiple birth model /2
+========================================================
+
+```{r echo=FALSE, out.width = "100%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_3.png")
+```
+
+***
+
+***
+
+Case study: Multiple birth model /2
+========================================================
+
+```{r echo=FALSE, out.width = "100%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_3.png")
+```
+
+***
+
+```{r echo=FALSE, out.width = "100%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_4.png")
+```
+
+Case study: Multiple birth model /3
+========================================================
+
+```{r echo=FALSE, out.width = "100%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_5.png")
+```
+
+***
+
+```{r echo=FALSE, out.width = "100%", fig.pos="c"}
+knitr::include_graphics("mbd_picture_6.png")
+```
 
 Case study: nodeSub
 ========================================================

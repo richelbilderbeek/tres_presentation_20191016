@@ -153,10 +153,50 @@ Very simular             |as good as we can        |the standard speciation prio
 Very differeny           |bad                      |using the wrong speciation prior
 In between               |disputable               |using the wrong speciation prior
 
-Case study: MBD
+Case study: Multiple birth model /1
 ========================================================
 
- * max 5 minutes, by Giovanni: biology in a bit more detail, preliminary results
+<img src="mbd_picture_1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="90%" />
+
+***
+
+***
+
+Case study: Multiple birth model /1
+========================================================
+
+<img src="mbd_picture_1.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="90%" />
+
+***
+
+<img src="mbd_picture_2.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="100%" />
+ 
+Case study: Multiple birth model /2
+========================================================
+
+<img src="mbd_picture_3.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="100%" />
+
+***
+
+***
+
+Case study: Multiple birth model /2
+========================================================
+
+<img src="mbd_picture_3.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="100%" />
+
+***
+
+<img src="mbd_picture_4.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" width="100%" />
+
+Case study: Multiple birth model /3
+========================================================
+
+<img src="mbd_picture_5.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" width="100%" />
+
+***
+
+<img src="mbd_picture_6.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="100%" />
 
 Case study: nodeSub
 ========================================================
