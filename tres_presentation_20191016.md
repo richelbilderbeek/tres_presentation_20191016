@@ -153,10 +153,60 @@ Very simular             |as good as we can        |the standard speciation prio
 Very differeny           |bad                      |using the wrong speciation prior
 In between               |disputable               |using the wrong speciation prior
 
-Case study: MBD
+Case study: Multiple birth model / Crowded phylogenies
 ========================================================
 
- * max 5 minutes, by Giovanni: biology in a bit more detail, preliminary results
+<img src="mbd_picture_1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="85%" />
+
+
+* Speciations occur in bursts
+* Process is poorly understood
+
+***
+
+<img src="mbd_picture_2.png" title="plot of chunk unnamed-chunk-26" alt="plot of chunk unnamed-chunk-26" width="100%" />
+ 
+Case study: Multiple birth model / Species pump
+========================================================
+
+<img src="mbd_picture_3.png" title="plot of chunk unnamed-chunk-27" alt="plot of chunk unnamed-chunk-27" width="60%" />
+
+* Changes in connectivity promote speciation
+* Species pump hypothesis
+
+Case study: Multiple birth model / Process
+========================================================
+
+&nbsp;
+
+&nbsp;
+
+* $\lambda$ is the per-species speciation rate
+* $\mu$ is the per-species extinction rate
+* $\nu$ is the environmental change rate
+* $q$ is the per-species speciation probability when an environmental change occurs
+
+***
+
+<img src="mbd_picture_4.png" title="plot of chunk unnamed-chunk-28" alt="plot of chunk unnamed-chunk-28" width="110%" />
+
+Case study: Multiple birth model / Parameter choice 1
+========================================================
+
+<img src="mbd_picture_5.png" title="plot of chunk unnamed-chunk-29" alt="plot of chunk unnamed-chunk-29" width="100%" />
+
+***
+
+<img src="mbd_picture_6.png" title="plot of chunk unnamed-chunk-30" alt="plot of chunk unnamed-chunk-30" width="100%" />
+
+Case study: Multiple birth model / Parameter choice 2
+========================================================
+
+<img src="mbd_picture_7.png" title="plot of chunk unnamed-chunk-31" alt="plot of chunk unnamed-chunk-31" width="100%" />
+
+***
+
+<img src="mbd_picture_8.png" title="plot of chunk unnamed-chunk-32" alt="plot of chunk unnamed-chunk-32" width="100%" />
 
 Case study: nodeSub
 ========================================================
