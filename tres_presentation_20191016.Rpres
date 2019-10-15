@@ -276,7 +276,7 @@ Biological interpretation of true and twin error distribution
 Two distributions are ...|then our inference is ...|due to ...
 -------------------------|-------------------------|----------------
 Very simular             |as good as we can        |the standard speciation priors being good enough
-Very differeny           |bad                      |using the wrong speciation prior
+Very different           |bad                      |using the wrong speciation prior
 In between               |disputable               |using the wrong speciation prior
 
 Case study: Multiple birth model / Crowded phylogenies
