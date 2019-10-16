@@ -16,6 +16,11 @@ autosize: true
 
 
 ```{r echo=FALSE}
+
+devtools::install_github("thijsjanzen/nodeSub")
+devtools::install_github("richelbilderbeek/pirouette", ref = "master")
+devtools::install_bioc("ggtree")
+
 library(pirouette)
 library(ggtree)
 library(ggplot2)

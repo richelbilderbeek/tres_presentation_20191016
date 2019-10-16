@@ -52,20 +52,11 @@ Results: Error
 <img src="results_node_sub.png" height=900>
 </div>
 
-Results: Substitution rate
-========================================================
-
-
-
 Conclusions and outlook
 ========================================================
 * node substitutions significantly affect tree inference
-* node substitutions reflect a relaxed clock model
-
-<br/>
-
-
-* investigate effect on non-balanced trees
+* but extinction appears to have no effect
+  * investigate effect on non-balanced trees
 
 <br/>
 
