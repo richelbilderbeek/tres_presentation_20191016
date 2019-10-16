@@ -400,16 +400,13 @@ Approach
 
 Proposed Node Substitution model
 ========================================================
-<div align="center">
-<img src="node_sub_models.png" height=900>
-</div>
 
+![](node_sub_models.png)
 
 Results: Error
 ========================================================
-<div align="center">
-<img src="results_node_sub.png" height=900>
-</div>
+
+![](results_node_sub.png)
 
 Results: Substitution rate
 ========================================================
@@ -435,6 +432,10 @@ Conclusions
  * `pirouette` shows the error we make in phylogenetic inference
  * We can prove show inference models do not work in all theoretical cases
  * Yet unknown to what extent (MBness, nodeSubness) these cases are present in nature
+
+***
+
+![](catfish.jpg)
 
 Questions
 ========================================================
