@@ -36,3 +36,4 @@ vignettes/*.pdf
 rsconnect/
 tres_presentation_20191016-cache/
 tres_presentation_20191016-figure/
+*.orig
