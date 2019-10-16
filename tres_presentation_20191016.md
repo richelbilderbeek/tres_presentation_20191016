@@ -17,16 +17,6 @@ autosize: true
 
 
 
-Overview
-========================================================
-
-Will be deleted before the actual presentation
-
- * 0-5 min: me: biological stuff
- * 5-15 min: me: pirouette's workflow, twinning
- * 15-20 min: (Giovanni) MBD: biology in a bit more detail, preliminary results
- * 20-30 min: (Thijs) nodeSub: biology in a bit more detail, difference with 'normale' pirouette pipeline, preliminary results
-
 Biology: which species lived when?
 ========================================================
 
@@ -156,6 +146,11 @@ In between               |disputable               |using the wrong speciation p
 Case study: Multiple birth model / Crowded phylogenies
 ========================================================
 
+ * By Giovanni Laudanno, Richel J.C. Bilderbeek and Rampal S. Etienne
+
+Case study: Multiple birth model / Crowded phylogenies
+========================================================
+
 <img src="mbd_picture_1.png" title="plot of chunk unnamed-chunk-25" alt="plot of chunk unnamed-chunk-25" width="85%" />
 
 
@@ -212,10 +207,83 @@ Case study: Multiple birth model / Parameter choice 2
 
 
 
-Case study: nodeSub
+Case study: substitutions at the nodes
 ========================================================
 
- * max 10 minutes, by Thijs: biology in a bit more detail, difference with 'normale' pirouette pipeline, preliminary results
+ * by Thijs Janzen, Rampal Etienne & Folmer Bokma
+
+Non-constant substitution rates
+========================================================
+* Problem: number of substitutions across branches is often not the same:
+
+<div align="center">
+<img src="sub_rate_PNAS.png" height=500>
+</div>
+
+        Moorjani et al. 2016 PNAS
+
+Bayesian Solution
+========================================================
+* Implement different clock rates, e.g.:
+  * along some branches, substitutions accumulate faster, along others slower
+  * but overall, all substitution rates are drawn from the same distribution
+
+<div align="center">
+<img src="uncorrelatedClock.png" height=500>
+</div>
+              https://beast.community/clocks
+
+Biological interpretation lacking
+========================================================
+Here, I propose an alternative explanation:
+* branching (speciation) events generate additional substitutions
+* a higher accumulated number of substitutions is indicative of past branching events that can no longer be measured, e.g. speciation events followed by extinction
+
+![plot of chunk unnamed-chunk-33](tres_presentation_20191016-figure/unnamed-chunk-33-1.png)![plot of chunk unnamed-chunk-33](tres_presentation_20191016-figure/unnamed-chunk-33-2.png)
+
+Approach
+========================================================
+* Before implementing the full likelihood into BEAST
+  * use pirouette to test if the two node substitution models affect tree inference at all
+  * check what substitution rate model is favoured when using a node substitution model
+
+Proposed Node Substitution model
+========================================================
+<div align="center">
+<img src="node_sub_models.png" height=900>
+</div>
+
+
+Results: Error
+========================================================
+<div align="center">
+<img src="results_node_sub.png" height=900>
+</div>
+
+Results: Substitution rate
+========================================================
+
+Conclusions and outlook
+========================================================
+* node substitutions significantly affect tree inference
+* node substitutions reflect a relaxed clock model
+
+<br/>
+
+
+* investigate effect on non-balanced trees
+
+<br/>
+
+* formulate likelihood function
+* create BEAST module
+
+Conclusions
+========================================================
+
+ * `pirouette` shows the error we make in phylogenetic inference
+ * We can prove show inference models do not work in all theoretical cases
+ * Yet unknown to what extent (MBness, nodeSubness) these cases are present in nature
 
 Questions
 ========================================================
