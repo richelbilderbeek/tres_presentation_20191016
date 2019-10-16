@@ -36,6 +36,16 @@ true_tree  <- ape::read.tree(text = "(((A:8, B:8):1, C:9):1, ((D:8, E:8):1, F:9)
 true_pir_params <- create_test_pir_params(
   alignment_params = create_test_alignment_params(
     root_sequence = create_blocked_dna(length = 40)
+  ),
+  experiments = list(
+    create_test_experiment(
+      inference_model = beautier::create_inference_model(
+        mcmc = beautier::create_mcmc(
+          chain_length = 10000,
+          store_every = 1000
+        )
+      )
+    )
   )
 )
 true_results <- pir_run(true_tree, true_pir_params)
@@ -165,6 +175,16 @@ twin_tree <- pirouette::create_twin_tree(true_tree)
 twin_pir_params <- create_test_pir_params(
   alignment_params = create_test_alignment_params(
     root_sequence = create_blocked_dna(length = 40)
+  ),
+  experiments = list(
+    create_test_experiment(
+      inference_model = beautier::create_inference_model(
+        mcmc = beautier::create_mcmc(
+          chain_length = 10000,
+          store_every = 1000
+        )
+      )
+    )
   )
 )
 twin_results <- pir_run(twin_tree, twin_pir_params)
@@ -337,25 +357,6 @@ knitr::include_graphics("mbd_picture_5.png")
 ```{r echo=FALSE, out.width = "100%", fig.pos="c"}
 # mbness per parameter settings
 knitr::include_graphics("mbd_picture_6.png")
-```
-
-Case study: Multiple birth model / Parameter choice 2
-========================================================
-
-[picture absent]
-
-```{r echo=FALSE, out.width = "100%", fig.pos="c"}
-# esses per parameter settings
-#knitr::include_graphics("mbd_picture_7.png")
-```
-
-***
-
-[picture absent]
-
-```{r echo=FALSE, out.width = "100%", fig.pos="c"}
-# percentage_success per parameter settings
-#knitr::include_graphics("mbd_picture_8.png")
 ```
 
 Case study: substitutions at the nodes
