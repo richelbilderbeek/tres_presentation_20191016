@@ -112,6 +112,7 @@ What we inferred
 ```{r echo=FALSE}
 babette::plot_densitree(
   true_posterior_trees,
+  alpha = 1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -147,6 +148,7 @@ image(ape::read.FASTA(true_pir_params$alignment_params$fasta_filename))
 # True posterior
 babette::plot_densitree(
   true_posterior_trees,
+  alpha = 1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -212,6 +214,7 @@ image(ape::read.FASTA(true_pir_params$alignment_params$fasta_filename))
 # True posterior
 babette::plot_densitree(
   true_posterior_trees,
+  alpha = 1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -258,6 +261,7 @@ image(ape::read.FASTA(twin_pir_params$alignment_params$fasta_filename))
 ```{r echo=FALSE, fig.width=4}
 babette::plot_densitree(
   twin_posterior_trees,
+  alpha = 1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
