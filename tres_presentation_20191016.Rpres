@@ -41,7 +41,7 @@ true_pir_params <- create_test_pir_params(
     create_test_experiment(
       inference_model = beautier::create_inference_model(
         mcmc = beautier::create_mcmc(
-          chain_length = 10000,
+          chain_length = 100000,
           store_every = 1000
         )
       )
@@ -81,6 +81,7 @@ A posterior
 ```{r echo=FALSE}
 babette::plot_densitree(
   true_posterior_trees,
+  alpha = 0.1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -112,7 +113,7 @@ What we inferred
 ```{r echo=FALSE}
 babette::plot_densitree(
   true_posterior_trees,
-  alpha = 1,
+  alpha = 0.1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -148,7 +149,7 @@ image(ape::read.FASTA(true_pir_params$alignment_params$fasta_filename))
 # True posterior
 babette::plot_densitree(
   true_posterior_trees,
-  alpha = 1,
+  alpha = 0.1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -182,7 +183,7 @@ twin_pir_params <- create_test_pir_params(
     create_test_experiment(
       inference_model = beautier::create_inference_model(
         mcmc = beautier::create_mcmc(
-          chain_length = 10000,
+          chain_length = 100000,
           store_every = 1000
         )
       )
@@ -214,7 +215,7 @@ image(ape::read.FASTA(true_pir_params$alignment_params$fasta_filename))
 # True posterior
 babette::plot_densitree(
   true_posterior_trees,
-  alpha = 1,
+  alpha = 0.1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -261,7 +262,7 @@ image(ape::read.FASTA(twin_pir_params$alignment_params$fasta_filename))
 ```{r echo=FALSE, fig.width=4}
 babette::plot_densitree(
   twin_posterior_trees,
-  alpha = 1,
+  alpha = 0.1,
   width = 2,
   consensus = true_tree$tip.label,
   scale.bar = FALSE,
@@ -288,15 +289,6 @@ Baseline error:
 ```{r echo=FALSE}
 pir_plot(twin_results)
 ```
-
-Biological interpretation of true and twin error distribution
-========================================================
-
-Two distributions are ...|then our inference is ...|due to ...
--------------------------|-------------------------|----------------
-Very simular             |as good as we can        |the standard speciation priors being good enough
-Very different           |bad                      |using the wrong speciation prior
-In between               |disputable               |using the wrong speciation prior
 
 Case study: Multiple birth model / Crowded phylogenies
 ========================================================
@@ -418,9 +410,6 @@ Results: Error
 
 ![](results_node_sub.png)
 
-Results: Substitution rate
-========================================================
-
 Conclusions and outlook
 ========================================================
 * node substitutions significantly affect tree inference
@@ -440,7 +429,7 @@ Conclusions
 ========================================================
 
  * `pirouette` shows the error we make in phylogenetic inference
- * We can prove show inference models do not work in all theoretical cases
+ * We can show inference models do not work in all theoretical cases
  * Yet unknown to what extent (MBness, nodeSubness) these cases are present in nature
 
 ***
